@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %} HOME {% endblock %}
+{% block content %}
+<main>
+    <section class="hero">
+        <div class="left">
+            <div>
+                <h1>Join the best cryptocurrency market</h1>
+                <span>Browse the 100 cryptocurrency Prices by Market Cap</span>
+            </div>
+        </div>
+        <div class="right">
+            <img src="/static/images/Wavy_Tech-24_Single-08.jpg" alt="">
+        </div>
+    </section>
+
+    
+
+    <section class="stock">
+        
+        <table>
+            <tr>
+                <th>Market</th>
+                <th>Price</th>
+                <th>Change 24H</th>
+            </tr>
+            {% for crypto in cryptos %}
+                <tr>
+                    <td>{{ crypto['name'] }} ({{ crypto['symbol'] }})</td>
+                    <td class="price">{{ crypto['price'] }}</td>
+                    <td class='change' {% if crypto['rate']['up-down'] == '-' %} style="background-color: #FF9E9E;" {% else %} style="background-color: #CFF5E7;" {% endif %}>
+                        {{ crypto['rate']['up-down']}} {{ crypto['rate']['value']}}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        
+    </section>
+
+    {% include "pagination.html" %}
+
+</main>
+    
+
+    
+{% endblock %}
